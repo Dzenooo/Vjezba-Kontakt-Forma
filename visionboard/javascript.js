@@ -12,17 +12,19 @@ const clearBtn = document.getElementById("clearBtn");
 const colors = ["color1", "color2", "color3", "color4", "color5", "color6"];
 
 // Primjeri slika i citata
+// Paths must be relative to the HTML page that includes this script (visionboard/whiteboard.html)
 const sampleImages = [
-  "slike/slika1.png",
-  "slike/slika2.png",
-  "slike/slika3.png",
-  "slike/slika4.png"
+  "slika1.png",
+  "slika2.png",
+  "slika3.png",
+  "slika4.png",
+  "pluto.png"
 ];
 
 const sampleQuotes = [
-  "â€œSvaka dovoljno napredna tehnologija jednaka je magiji.â€ â€“Arthur C. Clarke ",
-  "â€œTehnologija je rijeÄ koja opisuje neÅ¡to Å¡to joÅ¡ ne funkcionira.â€ - Douglas Adams",
-  "â€œNe osnivate zajednice. Zajednice veÄ‡ postoje. Pitanje koje treba postaviti je kako im moÅ¾ete pomoÄ‡i da budu bolje.â€â€“ Mark Zuckerberg"
+  "Svaka dovoljno napredna tehnologija jednaka je magiji. - Arthur C. Clarke ",
+  "Tehnologija je riječ koja opisuje nešto što još ne funkcionira. - Douglas Adams",
+  "Ne osnivate zajednice. Zajednice već postoje. Pitanje koje treba postaviti je kako im možete pomoći da budu bolje. - Mark Zuckerberg"
 ];
 
 // ======= Usluzni program za stvaranje stavki koje se mogu povlaciti i brisati =======
@@ -31,7 +33,7 @@ function makeDraggable(el) {
 
   // Kreiranje delete (X) button
   const delBtn = document.createElement("button");
-  delBtn.textContent = "ðŸ“Œ";
+  delBtn.textContent = "X";
   delBtn.className = "delete-btn";
   el.appendChild(delBtn);
 
@@ -71,7 +73,7 @@ addNoteBtn.addEventListener("click", () => {
   note.contentEditable = "true";
   note.style.left = Math.random() * 500 + "px";
   note.style.top = Math.random() * 300 + "px";
-  note.textContent = "NapiÅ¡i neÅ¡to...";
+  note.textContent = "Napiši nešto...";
   makeDraggable(note);
   board.appendChild(note);
 });

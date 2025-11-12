@@ -6,6 +6,7 @@ const addNoteBtn = document.getElementById("addNoteBtn");
 const addImageBtn = document.getElementById("addImageBtn");
 const addQuoteBtn = document.getElementById("addQuoteBtn");
 const saveBtn = document.getElementById("saveBtn");
+const loadBtn = document.getElementById("loadBtn");
 const clearBtn = document.getElementById("clearBtn");
 
 // Boje za ljepljive biljeÅ¡ke
@@ -17,8 +18,8 @@ const sampleImages = [
   "slika1.png",
   "slika2.png",
   "slika3.png",
-  "slika4.png",
-  "pluto.png"
+  "slika4.png"
+
 ];
 
 const sampleQuotes = [
@@ -142,12 +143,31 @@ function loadBoard() {
     board.appendChild(div);
   });
 }
+// Load saved board on page load (if present)
 loadBoard();
 
+// Wire up "Učitaj board" button to clear current board and load saved state
+if (loadBtn) {
+  loadBtn.addEventListener('click', () => {
+    // clear current items first to avoid duplicates
+    board.innerHTML = '';
+    loadBoard();
+  });
+}
+
 // ======= Ocisti Visual Board =======
+// Clear only the visible board; do NOT remove the saved board from localStorage so
+// the user can still use "Učitaj board" to restore it.
 clearBtn.addEventListener("click", () => {
-  if (confirm("Clear the board?")) {
+  if (confirm("Clear the board? (Saved board will NOT be deleted — use 'Obriši spremljeno' if you want to remove saved data)")) {
     board.innerHTML = "";
-    localStorage.removeItem("visionBoardItems");
   }
 });
+
+// Optional: helper to remove saved board if user wants to delete it explicitly
+function deleteSavedBoard() {
+  if (confirm("Are you sure you want to permanently delete the saved board?")) {
+    localStorage.removeItem("visionBoardItems");
+    alert('Saved board removed.');
+  }
+}

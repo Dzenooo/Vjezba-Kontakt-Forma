@@ -30,6 +30,7 @@
 			<li><button id="quizBtn" class="link-button" data-src="kviz_index.html">Kviz</button></li>
 			<li><button id="visionboardBtn" class="link-button" data-src="visionboard/visionboard.html">Interaktivni Vision Board</button></li>
 			<li><button id="visionBtn" class="link-button" data-src="whiteboard/whiteboard.html">Interaktivni Whiteboard</button></li>
+			<li><button id="kanbanBtn" class="link-button" data-src="kanban/kanban.html">Kanban ploča</button></li>
 		</ul>
 
 		<!-- VisionBoard na bijeloj površini -->
@@ -39,7 +40,7 @@
 		(function(){
 			const container = document.getElementById('visionContainer');
 			const buttons = Array.from(document.querySelectorAll('.link-button'));
-			let iframe; // single iframe reused for all embedded pages
+			let iframe; // jedan iframe se koristi za sve ugrađene stranice
 
 			function ensureIframe(){
 				if(!iframe){
@@ -59,13 +60,13 @@
 			}
 
 			buttons.forEach(btn => {
-				// store original text to restore later
+				// pohrani originalni tekst za kasnije vraćanje
 				if(!btn.getAttribute('data-original')) btn.setAttribute('data-original', btn.textContent);
 				btn.addEventListener('click', () => {
 					const src = btn.getAttribute('data-src');
 					if(!src) return;
 					ensureIframe();
-					// if iframe already showing same src, toggle visibility
+					// ako iframe već prikazuje isti izvor, prebacite vidljivost
 					if(iframe.src && iframe.src.endsWith(src)){
 						const hidden = container.style.display === 'none';
 						container.style.display = hidden ? 'block' : 'none';
@@ -73,12 +74,12 @@
 						return;
 					}
 
-					// load requested page
+					// učitaj traženu stranicu
 					iframe.src = src;
 					container.style.display = 'block';
-					// restore other buttons text
+					// vrati tekst drugih button-a
 					resetButtonLabels();
-					// update this button label to show hide action
+					// ažuriraj tekst ovog button-a da prikazuje akciju sakrivanja
 					btn.textContent = 'Sakrij';
 				});
 			});

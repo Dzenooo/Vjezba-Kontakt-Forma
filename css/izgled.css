@@ -1,103 +1,69 @@
-html
-{
-    
-    background: #7b7775;
+:root{
+    --bg: #f5f7fb;
+    --card: #ffffff;
+    --primary: #2b8aee; /* new modern primary color */
+    --accent: #ff7a59;
+    --muted: #6b7280;
+    --text: #1f2937;
 }
 
-body
-{
-    font-size:12px;
-    font-family: Verdana, Arial, sans-serif;
-    color:#484645;
+html,body{
+    height:100%;
+}
+
+body{
+    font-size:14px;
+    font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    color:var(--text);
     margin:0;
     line-height:1.6;
+    background: linear-gradient(180deg,#f7f9fc 0%, var(--bg) 100%);
 }
 
-header img
-{
-    margin: 10px 0 10px 30px;
+header img{ max-height:56px; display:block; }
+
+header, article{
+    width:90%;
+    max-width:1100px;
+    margin: 18px auto;
 }
 
-header, article
-{
-    width:80%;
-    margin: 0px auto;
-    background-color: white;
+nav{
+    background: transparent;
+    display:flex;
+    justify-content:center;
+    padding: 8px 0 0;
 }
 
-nav
-{
-    background-color: #c30f10;
-    padding: 8px 0;
-}
+nav ul{ display:flex; gap:18px; align-items:center; justify-content:center; }
 
-nav a, nav a:hover, nav a:visited, nav a:active
+nav a, nav a:visited{ color:var(--muted); padding:10px 14px; text-transform:uppercase; text-decoration:none; font-weight:600; border-radius:8px; }
+nav a:hover{ color:var(--primary); background:rgba(43,138,238,0.06); }
 
-{
-    color:white;
-    padding:10px 20px;
-    display:inline-block;
-    text-transform:uppercase;
-}
+nav ul li{ list-style:none; }
 
-nav a
-{
-    
-    text-decoration: none;
-}
+h2, h3{ color:var(--primary); }
 
-nav a:hover
-{
-    
-    text-decoration: underline;
-}
+a, a:hover, a:visited, a:active{ color: var(--primary); font-weight:600; }
 
-nav ul
-{
-    list-style: none;
-    margin:0;
-}
-
-nav ul li
-{
-    
-    display:inline-block;
-}
-
-a, a:hover, a:visited, a:active
-{
-    color: #c30f10;
-    font-weight:bold;
-}
-
-h2, h3
-{
-    color: #c30f10;
-}
-
-article
-{
-    padding :20px 40px;
+article{
+    padding: 28px 32px;
     box-sizing: border-box;
-    
-    border-bottom: 2px solid #c00000;
-    min-height:600px;
+    background: var(--card);
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(40,47,63,0.06);
+    min-height:520px;
 }
 
-article img
-{
-    float:right;
-    margin-right:15px;
-    margin-bottom:15px;
-}
+article img{ float:right; margin-right:18px; margin-bottom:18px; max-width:220px; border-radius:8px; }
 
-footer
-{
-    padding-top: 15px;
-    min-height: 30px;
-    background: #7b7775;
-    color:white;
+footer{
+    padding:18px 0;
+    min-height:40px;
+    background: transparent;
+    color:var(--muted);
     text-align:center;
+    margin-top: 20px;
 }
 
 table
@@ -135,52 +101,26 @@ iframe
     margin-top:20px;
 }
 
-fieldset
-{
-    width:50%;
-    margin-bottom:15px;
-    background-color:#f0f0f0;
-}
+fieldset{ width:100%; margin-bottom:15px; background-color:#f8fafc; border-radius:8px; padding:12px; }
 
-fieldset legend
-{
-    color: #c30f10;
-    font-weight:bold;
-}
+fieldset legend{ color:var(--primary); font-weight:700; }
 
-label
-{
-    display:inline-block;
-    width:30%;
-}
+label{ display:block; margin-bottom:6px; color:var(--muted); font-weight:600; }
 
 input[type=radio] + label, input[type=checkbox] + label
 {
     width:auto;
 }
 
-select, input[type=text], input[type=email], textarea
-{
-    box-sizing: border-box;
-    width:60%;
-    margin-bottom: 5px;
-}
+select, input[type=text], input[type=email], textarea{ box-sizing:border-box; width:100%; margin-bottom:10px; }
 
-input[type=checkbox]
-{
-    margin-left:30%;
-}
+input[type=checkbox]{ margin-right:8px; }
 
-button
-{
-    background-color: #c30f10;
-    color:white;
-    font-weight:bold;
-    border:none;
-    padding:10px 30px;
-    border-radius:5px;
-    
+button{
+    background: linear-gradient(180deg,var(--primary), #226fca);
+    color: #fff; font-weight:700; border:none; padding:10px 18px; border-radius:10px; cursor:pointer; box-shadow: 0 6px 18px rgba(43,138,238,0.12);
 }
+button:hover{ transform: translateY(-2px); }
 
 /* Contact form styles (scoped to #contactForm) */
 #contactForm {
@@ -229,8 +169,8 @@ button
 #contactForm input:focus,
 #contactForm textarea:focus {
     outline: none;
-    border-color: #c30f10;
-    box-shadow: 0 0 0 4px rgba(195,15,16,0.06);
+    border-color: var(--primary);
+    box-shadow: 0 0 0 6px rgba(43,138,238,0.06);
 }
 
 #contactForm .form-checkbox {
@@ -243,34 +183,12 @@ button
     margin-left: 0; /* keep checkbox aligned */
 }
 
-#contactForm .error {
-    color: #b00000;
-    font-size: 0.95em;
-    margin-top: 6px;
-}
+#contactForm .error { color: #b00000; font-size:0.95em; margin-top:6px; }
+#contactForm .success { color: #1a7a1a; font-weight:600; margin-top:8px; }
 
-#contactForm .success {
-    color: #1a7a1a;
-    font-weight: 600;
-    margin-top: 8px;
-}
+#contactForm button { background: linear-gradient(180deg,var(--primary), #226fca); color:#fff; border:none; padding:12px 26px; border-radius:8px; font-weight:700; cursor:pointer; box-shadow:0 6px 14px rgba(43,138,238,0.08); }
 
-#contactForm button {
-    background-color: #c30f10;
-    color: #fff;
-    border: none;
-    padding: 12px 26px;
-    border-radius: 6px;
-    font-weight: 700;
-    cursor: pointer;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-}
-
-#contactForm button:hover {
-    opacity: 0.97;
-    transform: translateY(-1px);
-    transition: all 0.12s ease;
-}
+#contactForm button:hover{ transform: translateY(-2px); transition: all 0.12s ease; }
 
 @media (min-width: 900px) {
     /* optional two-column helper if needed */
@@ -281,3 +199,9 @@ button
     }
     #contactForm .two-col .form-row { margin-bottom: 0; }
 }
+
+/* VisionBoard embedding styles */
+.vision-container{ margin-top:18px; background:var(--card); border-radius:10px; box-shadow: 0 10px 30px rgba(15,23,42,0.06); padding:12px; }
+.vision-container iframe{ width:100%; height:680px; border:none; border-radius:8px; background:var(--card); }
+.link-button{ background:none; border:none; color:var(--muted); font-weight:700; cursor:pointer; padding:0; }
+.link-button:focus{ outline:2px solid rgba(43,138,238,0.12); }

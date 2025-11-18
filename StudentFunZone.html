@@ -25,12 +25,64 @@
 		<h2>Student Fun Zone</h2>
         <p>Odaberite jednu igru!</p>
 	
-<ul>
-            <li><a href="bingo.html">Bingo</a></li>
-            <li><a href="kviz.html">Kviz</a></li>
-			<li><a href="visionboard/visionboard.html">Interaktivni Vision Board</a></li>
-            
-        </ul>
+	<ul>
+			<li><a href="bingo.html">Bingo</a></li>
+			<li><button id="quizBtn" class="link-button" data-src="kviz_index.html">Kviz</button></li>
+			<li><button id="visionBtn" class="link-button" data-src="visionboard/visionboard.html">Interaktivni Vision Board</button></li>
+		</ul>
+
+		<!-- VisionBoard na bijeloj površini -->
+		<div id="visionContainer" class="vision-container" aria-hidden="true"></div>
+
+		<script>
+		(function(){
+			const container = document.getElementById('visionContainer');
+			const buttons = Array.from(document.querySelectorAll('.link-button'));
+			let iframe; // single iframe reused for all embedded pages
+
+			function ensureIframe(){
+				if(!iframe){
+					iframe = document.createElement('iframe');
+					iframe.id = 'embedIframe';
+					iframe.loading = 'lazy';
+					container.appendChild(iframe);
+					container.setAttribute('aria-hidden','false');
+				}
+			}
+
+			function resetButtonLabels(){
+				buttons.forEach(b => {
+					const original = b.getAttribute('data-original');
+					if(original) b.textContent = original;
+				});
+			}
+
+			buttons.forEach(btn => {
+				// store original text to restore later
+				if(!btn.getAttribute('data-original')) btn.setAttribute('data-original', btn.textContent);
+				btn.addEventListener('click', () => {
+					const src = btn.getAttribute('data-src');
+					if(!src) return;
+					ensureIframe();
+					// if iframe already showing same src, toggle visibility
+					if(iframe.src && iframe.src.endsWith(src)){
+						const hidden = container.style.display === 'none';
+						container.style.display = hidden ? 'block' : 'none';
+						btn.textContent = hidden ? 'Sakrij' : 'Prikaži';
+						return;
+					}
+
+					// load requested page
+					iframe.src = src;
+					container.style.display = 'block';
+					// restore other buttons text
+					resetButtonLabels();
+					// update this button label to show hide action
+					btn.textContent = 'Sakrij';
+				});
+			});
+		})();
+		</script>
         
         </article>
         <footer>&copy; Internacionalna poslovno-informaciona akademija Tuzla</footer>
